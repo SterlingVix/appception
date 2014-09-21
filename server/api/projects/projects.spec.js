@@ -12,7 +12,10 @@ describe('GET /api/projects', function() {
       .expect(200)
       .expect('Content-Type', /json/)
       .end(function(err, res) {
-        if (err) return done(err);
+        if (err) {
+          console.log("\n\nERROR: res = ", res, "\n\nerr = ", err);
+          return done(err);
+        }
         res.body.should.be.instanceof(Array);
         done();
       });
