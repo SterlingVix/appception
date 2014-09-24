@@ -2,6 +2,7 @@
   "name": "appception",
   "version": "0.0.1",
   "main": "server/app.js",
+  "description" : " NOTES: Changed/missing in 'dependencies': socket.io, socket.io0client, socket.io-jwt   ||    Changed/missing in 'scripts': postinstall: grunt build",
   "dependencies": {
     "body-parser": "^1.5.2",
     "brackets": "^0.3.0",
@@ -62,8 +63,7 @@
     "serve-favicon": "^2.0.1",
     "shelljs": "^0.3.0",
     "time-grunt": "^0.3.2",
-    "unzip": "^0.1.11",
-    "" : "//Changed / missing packages: socket.io, socket.io0client, socket.io-jwt "
+    "unzip": "^0.1.11"
   },
   "devDependencies": {
     "composable-middleware": "^0.3.0",
@@ -96,7 +96,6 @@
   "scripts": {
     "start": "node server/app.js",
     "test": "grunt test",
-    "": " // postinstall: grunt build",
     "update-webdriver-short": "npm run update-webdriver"
   },
   "private": true
