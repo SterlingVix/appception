@@ -39,11 +39,22 @@ module.exports = function(app) {
   app.use('/brackets', brackets()); // BEST GUESS...
 
 
+    /************************
+     * NOTE: Aaron changed this as part of deploy testing.
+     * Lines 56 & 57 are the original Yeoman lines.
+     * Aaron rolled them back from the modified lines below:
+     *
+     *   app.use(express.static(path.join(config.root, 'dist/public')));
+     *   app.set('appPath', config.root + '/dist/public');
+     *
+     * We were getting a weird build error where paths were looking for '.../dist/dist/...'
+     * This is the fix for that error.
+     ********************************/
   app.use(passport.initialize());
   if ('production' === env) {
     // app.use(favicon(path.join(config.root, 'client/components', 'favicon.ico')));
-    app.use(express.static(path.join(config.root, 'dist/public')));
-    app.set('appPath', config.root + '/dist/public');
+    app.use(express.static(path.join(config.root, 'public')));
+    app.set('appPath', config.root + '/public');
     app.use(morgan('dev'));
   }
 
