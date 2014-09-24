@@ -48,7 +48,7 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       client: require('./bower.json').appPath || 'client',
-      dist: 'dist'
+      dist: 'dist'        /***********************************************************/
     },
     express: {
       options: {
@@ -62,18 +62,14 @@ module.exports = function (grunt) {
       },
       prod: {
         options: {
-          script: 'dist/server/app.js'
+          script: 'dist/server/app.js'        /*******     DIFF against GitHub file...      ****************************************************/
         }
       }
     },
     open: {
       server: {
         url: 'http://localhost:<%= express.options.port %>'
-      }//,
-//      edit: { // to open the project for SublimeText editing
-//        path: 'AppceptionSublimeProject.sublime-project',
-//        tasks: ['edit']
-//      }
+              }
     },
     watch: {
       injectJS: {
@@ -402,7 +398,7 @@ module.exports = function (grunt) {
 
     buildcontrol: {
       options: {
-        dir: 'dist',
+        dir: 'dist',        /***********************************************************/
         commit: true,
         push: true,
         connectCommits: false,
@@ -580,7 +576,7 @@ module.exports = function (grunt) {
   grunt.registerTask('express-keepalive', 'Keep grunt running', function() {
     this.async();
   });
-
+        /***********************************************************/
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'env:all', 'env:prod', 'express:prod', 'wait', 'open', 'express-keepalive']);
@@ -685,7 +681,4 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
-
-  //grunt.registerTask('edit', [
-  //]);
 };
