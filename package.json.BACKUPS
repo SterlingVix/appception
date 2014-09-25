@@ -2,6 +2,7 @@
   "name": "appception",
   "version": "0.0.1",
   "main": "server/app.js",
+  "description": " NOTES- Changed/missing in _dependencies__ socket.io, socket.io0client, socket.io-jwt   ||    Changed/missing in _scripts__  postinstall: grunt build",
   "dependencies": {
     "body-parser": "~1.5.0",
     "brackets": "^0.3.0",

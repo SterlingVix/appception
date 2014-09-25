@@ -48,7 +48,7 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       client: require('./bower.json').appPath || 'client',
-      dist: 'dist'
+      dist: 'dist'        /***********************************************************/
     },
     express: {
       options: {
@@ -62,18 +62,14 @@ module.exports = function (grunt) {
       },
       prod: {
         options: {
-          script: 'dist/server/app.js'
+          script: 'dist/server/app.js'        /*******     DIFF against GitHub file...      ****************************************************/
         }
       }
     },
     open: {
       server: {
         url: 'http://localhost:<%= express.options.port %>'
-      }//,
-//      edit: { // to open the project for SublimeText editing
-//        path: 'AppceptionSublimeProject.sublime-project',
-//        tasks: ['edit']
-//      }
+              }
     },
     watch: {
       injectJS: {
@@ -101,15 +97,15 @@ module.exports = function (grunt) {
         ],
         tasks: ['newer:jshint:all', 'karma']
       },
-      injectStylus: {
+      injectSass: {
         files: [
-          '<%= yeoman.client %>/{app,components}/**/*.styl'],
-        tasks: ['injector:stylus']
+          '<%= yeoman.client %>/{app,components}/**/*.{scss,sass}'],
+        tasks: ['injector:sass']
       },
-      stylus: {
+      sass: {
         files: [
-          '<%= yeoman.client %>/{app,components}/**/*.styl'],
-        tasks: ['stylus', 'autoprefixer']
+          '<%= yeoman.client %>/{app,components}/**/*.{scss,sass}'],
+        tasks: ['sass', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -244,7 +240,7 @@ module.exports = function (grunt) {
       target: {
         src: '<%= yeoman.client %>/index.html',
         ignorePath: '<%= yeoman.client %>/',
-        exclude: [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/', /bootstrap/]
+        exclude: [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/', /bootstrap.css/, /font-awesome.css/ ]
       }
     },
 
@@ -402,7 +398,7 @@ module.exports = function (grunt) {
 
     buildcontrol: {
       options: {
-        dir: 'dist',
+        dir: 'dist',        /***********************************************************/
         commit: true,
         push: true,
         connectCommits: false,
@@ -425,10 +421,10 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'stylus',
+        'sass',
       ],
       test: [
-        'stylus',
+        'sass',
       ],
       debug: {
         tasks: [
@@ -440,7 +436,7 @@ module.exports = function (grunt) {
         }
       },
       dist: [
-        'stylus',
+        'sass',
         'imagemin',
         'svgmin'
       ]
@@ -484,19 +480,19 @@ module.exports = function (grunt) {
       all: localConfig
     },
 
-    // Compiles Stylus to CSS
-    stylus: {
+    // Compiles Sass to CSS
+    sass: {
       server: {
         options: {
-          paths: [
+          loadPath: [
             '<%= yeoman.client %>/bower_components',
             '<%= yeoman.client %>/app',
             '<%= yeoman.client %>/components'
           ],
-          "include css": true
+          compass: false
         },
         files: {
-          '.tmp/app/app.css' : '<%= yeoman.client %>/app/app.styl'
+          '.tmp/app/app.css' : '<%= yeoman.client %>/app/app.scss'
         }
       }
     },
@@ -526,8 +522,8 @@ module.exports = function (grunt) {
         }
       },
 
-      // Inject component styl into app.styl
-      stylus: {
+      // Inject component scss into app.scss
+      sass: {
         options: {
           transform: function(filePath) {
             filePath = filePath.replace('/client/app/', '');
@@ -538,9 +534,9 @@ module.exports = function (grunt) {
           endtag: '// endinjector'
         },
         files: {
-          '<%= yeoman.client %>/app/app.styl': [
-            '<%= yeoman.client %>/{app,components}/**/*.styl',
-            '!<%= yeoman.client %>/app/app.styl'
+          '<%= yeoman.client %>/app/app.scss': [
+            '<%= yeoman.client %>/{app,components}/**/*.{scss,sass}',
+            '!<%= yeoman.client %>/app/app.{scss,sass}'
           ]
         }
       },
@@ -580,7 +576,7 @@ module.exports = function (grunt) {
   grunt.registerTask('express-keepalive', 'Keep grunt running', function() {
     this.async();
   });
-
+        /***********************************************************/
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'env:all', 'env:prod', 'express:prod', 'wait', 'open', 'express-keepalive']);
@@ -590,7 +586,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:stylus',
+        'injector:sass', 
         'concurrent:server',
         'injector',
         'wiredep',
@@ -602,7 +598,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'env:all',
-      'injector:stylus',
+      'injector:sass', 
       'concurrent:server',
       'injector',
       'wiredep',
@@ -632,7 +628,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:stylus',
+        'injector:sass',
         'concurrent:test',
         'injector',
         'autoprefixer',
@@ -645,7 +641,7 @@ module.exports = function (grunt) {
         'clean:server',
         'env:all',
         'env:test',
-        'injector:stylus',
+        'injector:sass', 
         'concurrent:test',
         'injector',
         'wiredep',
@@ -663,7 +659,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'injector:stylus',
+    'injector:sass',
     'concurrent:dist',
     'injector',
     'wiredep',
@@ -685,7 +681,4 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
-
-  //grunt.registerTask('edit', [
-  //]);
 };
