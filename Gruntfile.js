@@ -11,7 +11,9 @@
 * opens browser
 **********************************/
 
-module.exports = function (grunt) {
+var Path = require('path'); // added from nimble webmaker: https://github.com/mozilla/nimble.webmaker.org/blob/master/gruntfile.js
+
+module.exports = function(grunt) {
   var localConfig;
 
   try {
@@ -80,6 +82,19 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
+    exec: {
+      update_nimble_submodules: {
+        command: 'git submodule update --init --recursive && npm install',
+        stdout: true,
+        stderr: true
+      }
+    }, // end exec
+
+    jshint: {
+      // files: ['gruntfile.js', 'app.js', 'lib/**/*.js']
+      files: ['nimble/gruntfile.js', 'nimble/app.js', 'nimble/lib/**/*.js']
+    }, // end jshint
 
     express: {
       options: {
@@ -157,7 +172,7 @@ module.exports = function (grunt) {
         files: {
           src: 'client/app/min/*.*'
         }
-      }//,
+      } //,
       // serverFiles: 'server/tempfiles'
     }, // end clean
 
@@ -291,8 +306,9 @@ module.exports = function (grunt) {
       js: {
         files: [{
           src: ['client/app/min/app.cat.js',
-          '!client/**/*.min.js',
-          '!client/bower_components'],
+            '!client/**/*.min.js',
+            '!client/bower_components'
+          ],
           dest: 'client/app/min/app.min.js'
         }] // end files[]
       }
@@ -349,6 +365,8 @@ module.exports = function (grunt) {
   //     ]);
   //   }
 
+  grunt.registerTask('init', ['exec:update_nimble_submodules']);
+
   // Used for delaying livereload until after server has restarted
   grunt.registerTask('wait', function() {
     grunt.log.ok('Waiting for server reload...');
@@ -365,16 +383,16 @@ module.exports = function (grunt) {
     this.async();
   });
 
-/***********************************
- * There are 3 tasks below:
- *   test - for testing the current task we're working on
- *   clean - to clean temp files
- *   build - for all build tasks that CURRENTLY WORK
- *   serve - for the server.
- *
- * As tests pass, they should be added to 'build' or 'server'.
- * the default 'grunt' task will build, then serve.
- **********************************/
+  /***********************************
+   * There are 3 tasks below:
+   *   test - for testing the current task we're working on
+   *   clean - to clean temp files
+   *   build - for all build tasks that CURRENTLY WORK
+   *   serve - for the server.
+   *
+   * As tests pass, they should be added to 'build' or 'server'.
+   * the default 'grunt' task will build, then serve.
+   **********************************/
 
   grunt.registerTask('test', [
     'stylus',
@@ -410,6 +428,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'build',
+    'jshint', // added from Nimble Gruntfile.js
     'serve'
   ]);
 }; // end Gruntfile
