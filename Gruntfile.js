@@ -92,8 +92,8 @@ module.exports = function(grunt) {
     }, // end exec
 
     jshint: {
-      // files: ['gruntfile.js', 'app.js', 'lib/**/*.js']
-      files: ['nimble/gruntfile.js', 'nimble/app.js', 'nimble/lib/**/*.js']
+      files: ['gruntfile.js', 'app.js', 'lib/**/*.js']
+      // files: ['nimble/gruntfile.js', 'nimble/app.js', 'nimble/lib/**/*.js']
     }, // end jshint
 
     express: {
