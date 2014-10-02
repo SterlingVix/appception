@@ -8,3 +8,4 @@ server/tempfiles
 ~$*
 *sublime-*
 node_modules
+/**/node_modules
