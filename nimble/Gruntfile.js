@@ -318,7 +318,6 @@ module.exports = function (grunt) {
 
     // task: build
     grunt.registerTask('build', [
-        'jasmine',
         'clean',
         'less',
         'targethtml',
@@ -329,10 +328,9 @@ module.exports = function (grunt) {
         /*'cssmin',*/
         /*'uglify',*/
         'copy',
-        'usemin',
-        'build-config'
+        'usemin'
     ]);
 
     // Default task.
-    grunt.registerTask('default', ['test']);
+    grunt.registerTask('default', ['install', 'build']);
 };

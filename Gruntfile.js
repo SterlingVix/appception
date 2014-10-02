@@ -285,107 +285,78 @@ module.exports = function (grunt) {
     }, // end watch
 
 
-
-
-
-/************************************************
- *              exec:
- * command (alias: cmd): The shell command to be executed. Must be a string or a function that returns a string.
- * stdout: If true, stdout will be printed. Defaults to true.
- * stderr: If true, stderr will be printed. Defaults to true.
- * cwd: Current working directory of the shell command. Defaults to the directory containing your Gruntfile.
- * exitCode (alias: exitCodes): The expected exit code(s), task will fail if the actual exit code doesn't match. Defaults to 0. Can be an array for multiple allowed exit codes.
- * callback: The callback function passed child_process.exec. Defaults to a noop.
- * If the configuration is instead a simple string, it will be interpreted as a full command itself:
- * 
- *   exec: {
- *     echo_something: 'echo "This is something"'
- *   }
- ***********************************************/
+    /************************************************
+     *              exec:
+     * command (alias: cmd): The shell command to be executed. Must be a string or a function that returns a string.
+     * stdout: If true, stdout will be printed. Defaults to true.
+     * stderr: If true, stderr will be printed. Defaults to true.
+     * cwd: Current working directory of the shell command. Defaults to the directory containing your Gruntfile.
+     * exitCode (alias: exitCodes): The expected exit code(s), task will fail if the actual exit code doesn't match. Defaults to 0. Can be an array for multiple allowed exit codes.
+     * callback: The callback function passed child_process.exec. Defaults to a noop.
+     * If the configuration is instead a simple string, it will be interpreted as a full command itself:
+     * 
+     *   exec: {
+     *     echo_something: 'echo "This is something"'
+     *   }
+     ***********************************************/
     exec: { // executes on the command line
       startExec: {
         cmd: 'echo " = = = = Installing NPM and Bower components = = = ="'
       },
+      appception: {
+        command: 'bower install --recursive' // install bower but NOT npm, or we'll be in a loop!!!
+      },
+      nimble: {  // package
+        cwd: './nimble',
+        command: 'npm install --recursive && grunt build',
+        exitCode: 6
+      },
       mustache: {  // package
         cwd: './nimble/src/thirdparty/mustache',
-        command: 'npm install'
+        command: 'npm install --recursive'
       },
-      // echo_something2: {
-      //   cwd: './nimble/src',
-      //   cmd: 'ls -l'
-      // },
-      nimble: {  // package  &&  bower
-        cwd: './nimble',
-        command: 'npm install'
-      },
-      // JSLint: {  // NOTHING
-      //   cwd: './nimble/src/extensions/default/JSLint/thirdparty/jslint',
-      //   command: 'npm install'
-      // },
       acorn: {  // package
         cwd: './nimble/src/extensions/default/JavaScriptCodeHints/thirdparty/acorn',
-        command: 'npm install'
+        command: 'npm install --recursive'
       },
-      tern: {  // package  &&  bower
+      tern: {  // package
         cwd: './nimble/src/extensions/default/JavaScriptCodeHints/thirdparty/tern',
-        command: 'npm install'
+        command: 'npm install --recursive'
       },
       makedriveSyncIcon: {  // package  &&  bower
         cwd: './nimble/src/extensions/default/makedrive-sync-icon',
-        command: 'npm install'
+        command: 'bower install --recursive && npm install --recursive --force'
       },
       codemirror: {  // package  &&  bower
         cwd: './nimble/src/thirdparty/CodeMirror2',
-        command: 'npm install'
+        command: 'npm install --recursive && bower install --recursive'
       },
-      // i18n: {  // NOTHING
-      //   cwd: './nimble/src/thirdparty/i18n',
-      //   command: 'npm install'
-      // },
       makedrive: {  // package  &&  bower
         cwd: './nimble/src/thirdparty/makedrive',
-        command: 'npm install'
+        command: 'npm install --recursive && bower install --recursive'
       },
-      // pathUtils: {  // NOTHING
-      //   cwd: './nimble/src/thirdparty/path-utils',
-      //   command: 'npm install'
-      // },
       requirejs: {  // package
         cwd: './nimble/src/thirdparty/requirejs',
-        command: 'npm install'
+        command: 'npm install --recursive'
       },
-      text: {  // NO INSTALL package
+      text: {  // NO INSTALL package. Keeping for reference to "main" in package.json (which may be meaningless)
         cwd: './nimble/src/thirdparty/text',
-        command: 'npm install'
+        command: 'npm install --recursive'
       }
+      // JSLint: {  // NOTHING
+      //   cwd: './nimble/src/extensions/default/JSLint/thirdparty/jslint',
+      //   command: 'npm install --recursive'
+      // },
+      // i18n: {  // NOTHING
+      //   cwd: './nimble/src/thirdparty/i18n',
+      //   command: 'npm install --recursive'
+      // },
+      // pathUtils: {  // NOTHING
+      //   cwd: './nimble/src/thirdparty/path-utils',
+      //   command: 'npm install --recursive'
+      // },
     } // end exec
     
-    // 'npm install --recursive src/extensions/default/JSLint/thirdparty/jslint/package.json'
-    // 'npm install --recursive src/extensions/default/JavaScriptCodeHints/thirdparty/acorn/package.json'
-    // 'npm install --recursive src/extensions/default/JavaScriptCodeHints/thirdparty/tern/package.json'
-    // 'npm install --recursive src/extensions/default/makedrive-sync-icon/package.json'
-    // 'npm install --recursive src/thirdparty/CodeMirror2/package.json'
-    // 'npm install --recursive src/thirdparty/i18n/package.json'
-    // 'npm install --recursive src/thirdparty/makedrive/package.json'
-    // 'npm install --recursive src/thirdparty/mustache/package.json'
-    // 'npm install --recursive src/thirdparty/path-utils/package.json'
-    // 'npm install --recursive src/thirdparty/requirejs/package.json'
-    // 'npm install --recursive src/thirdparty/text/package.json'
-    // 'bower install src/extensions/default/JSLint/thirdparty/jslint/bower.json'
-    // 'bower install src/extensions/default/JavaScriptCodeHints/thirdparty/acorn/bower.json'
-    // 'bower install src/extensions/default/JavaScriptCodeHints/thirdparty/tern/bower.json'
-    // 'bower install src/extensions/default/makedrive-sync-icon/bower.json'
-    // 'bower install src/thirdparty/CodeMirror2/bower.json'
-    // 'bower install src/thirdparty/i18n/bower.json'
-    // 'bower install src/thirdparty/makedrive/bower.json'
-    // 'bower install src/thirdparty/mustache/bower.json'
-    // 'bower install src/thirdparty/path-utils/bower.json'
-    // 'bower install src/thirdparty/requirejs/bower.json'
-    // 'bower install src/thirdparty/text/bower.json'
-    
-
-
-
     /**********************************************
      *     END init config
      *********************************************/
@@ -468,49 +439,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'build',
-    'serve'
+    'exec'
   ]);
 }; // end Gruntfile
-
-/******************************
- * We might need grunt to issue the following commands during build:
- *
- *   cd nimble // to enter the nimble directory
- *   npm install --recursive // to recursively install npm packages
- *   git submodule update --init // to initialize NIMBLE's submodules!
- *
- * This is to enable the nimble submodule to function over Azure.
-******************************/
-
-
-/********************************
- * The following npm and bower
- * must be run to capture all
- * installations of what were
- * previously submodules:
- *
-npm install --recursive src/extensions/default/JSLint/thirdparty/jslint/package.json
-npm install --recursive src/extensions/default/JavaScriptCodeHints/thirdparty/acorn/package.json
-npm install --recursive src/extensions/default/JavaScriptCodeHints/thirdparty/tern/package.json
-npm install --recursive src/extensions/default/makedrive-sync-icon/package.json
-npm install --recursive src/thirdparty/CodeMirror2/package.json
-npm install --recursive src/thirdparty/i18n/package.json
-npm install --recursive src/thirdparty/makedrive/package.json
-npm install --recursive src/thirdparty/mustache/package.json
-npm install --recursive src/thirdparty/path-utils/package.json
-npm install --recursive src/thirdparty/requirejs/package.json
-npm install --recursive src/thirdparty/text/package.json
-bower install src/extensions/default/JSLint/thirdparty/jslint/bower.json
-bower install src/extensions/default/JavaScriptCodeHints/thirdparty/acorn/bower.json
-bower install src/extensions/default/JavaScriptCodeHints/thirdparty/tern/bower.json
-bower install src/extensions/default/makedrive-sync-icon/bower.json
-bower install src/thirdparty/CodeMirror2/bower.json
-bower install src/thirdparty/i18n/bower.json
-bower install src/thirdparty/makedrive/bower.json
-bower install src/thirdparty/mustache/bower.json
-bower install src/thirdparty/path-utils/bower.json
-bower install src/thirdparty/requirejs/bower.json
-bower install src/thirdparty/text/bower.json
-
-********************************/
-

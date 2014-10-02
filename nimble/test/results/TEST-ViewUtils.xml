@@ -5,9 +5,9 @@
     
   </testsuite>
 
-  <testsuite name="ViewUtils Scroller Shadows" errors="0" tests="4" failures="0" time="0.023" timestamp="2014-10-01T18:09:55.364Z">
+  <testsuite name="ViewUtils Scroller Shadows" errors="0" tests="4" failures="0" time="0.014" timestamp="2014-10-02T01:12:06.650Z">
     
-      <testcase assertions="3" classname="ViewUtils Scroller Shadows" name="should not show the top shadow when no scrolling is available" time="0.012">
+      <testcase assertions="3" classname="ViewUtils Scroller Shadows" name="should not show the top shadow when no scrolling is available" time="0.007">
         
       </testcase>
     
@@ -25,9 +25,9 @@
     
   </testsuite>
 
-  <testsuite name="ViewUtils getFileEntryDisplay" errors="0" tests="3" failures="0" time="0.004" timestamp="2014-10-01T18:09:55.368Z">
+  <testsuite name="ViewUtils getFileEntryDisplay" errors="0" tests="3" failures="0" time="0.002" timestamp="2014-10-02T01:12:06.653Z">
     
-      <testcase assertions="1" classname="ViewUtils getFileEntryDisplay" name="should do nothing if there&#x27;s no extension" time="0.001">
+      <testcase assertions="1" classname="ViewUtils getFileEntryDisplay" name="should do nothing if there&#x27;s no extension" time="0">
         
       </testcase>
     
@@ -35,7 +35,7 @@
         
       </testcase>
     
-      <testcase assertions="1" classname="ViewUtils getFileEntryDisplay" name="should not mark up dot files as being an extension" time="0">
+      <testcase assertions="1" classname="ViewUtils getFileEntryDisplay" name="should not mark up dot files as being an extension" time="0.001">
         
       </testcase>
     
