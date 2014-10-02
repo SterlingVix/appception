@@ -325,7 +325,7 @@ module.exports = function (grunt) {
       },
       makedriveSyncIcon: {  // package  &&  bower
         cwd: './nimble/src/extensions/default/makedrive-sync-icon',
-        command: 'bower install --recursive && npm install --recursive --force'
+        command: 'npm install --recursive --force'
       },
       codemirror: {  // package  &&  bower
         cwd: './nimble/src/thirdparty/CodeMirror2',
@@ -430,6 +430,11 @@ module.exports = function (grunt) {
     'uglify'
   ]);
 
+  grunt.registerTask('deploy', [
+    'build',
+    'exec'
+  ]);
+
   grunt.registerTask('serve', [
     'express:dev',
     'wait',
@@ -439,6 +444,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'build',
-    'exec'
+    'serve'
   ]);
 }; // end Gruntfile
