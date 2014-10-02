@@ -1,0 +1,25 @@
+{
+  "name": "filer",
+  "version": "0.0.33",
+  "main": "dist/filer.js",
+  "ignore": [
+    "build",
+    "examples",
+    "package.json",
+    "tests",
+    "gruntfile.js",
+    "node_modules",
+    "src",
+    "tools"
+  ],
+  "homepage": "https://github.com/filerjs/filer",
+  "_release": "0.0.33",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.33",
+    "commit": "b90bfa06e3ceaa34e603ff50a1c6dfcd88178219"
+  },
+  "_source": "git://github.com/filerjs/filer.git",
+  "_target": "~0.0.29",
+  "_originalSource": "filer"
+}
