@@ -41,13 +41,24 @@ angular.module('appceptionApp')
 
 
     $scope.addBranch = function() {
-      var branchName = prompt("Enter your branch name:");
-      branchName = branchName || 'gh-pages'; // default to 'gh-pages'
+      var branchname = prompt("Enter your branch name:");
 
-      github.createBranch($scope.username, $scope.repoName, 'master', branchName)
+      console.log("branchname = ", branchname);
+
+      // Validate: if branch is blank or too short
+      if (!branchname || branchname.length < 3) {
+        return alert("You must enter a branch name of at least 3 characters.\nThis branch was not added.");
+      }
+
+      // Validate: if branchname already exists...
+      // if () {
+      //   alert("You must enter a branch name of at least 3 characters.\nThis branch was not added.");
+      // }
+
+      github.createBranch($scope.username, $scope.repoName, 'master', branchname)
         .then(function(res) {
-          console.log('addBranch', branchName, 'success!\n', res)
-          // $scope.currentBranch = branchName; // Can/should we track the user's current branch
+          console.log('addBranch', branchname, 'success!\n', res)
+          // $scope.currentBranch = branchname; // Can/should we track the user's current branch
         })
     }; // end addBranch()
 
