@@ -6,7 +6,7 @@
 
 var errors = require('./components/errors');
 var connect = require('connect'); // include connect middleware: https://www.npmjs.org/package/connect
-var brackets = require('brackets'); // include brackets web module: https://www.npmjs.org/package/brackets
+//var brackets = require('brackets'); // include brackets web module: https://www.npmjs.org/package/brackets
 var express = require('express');
 var path = require('path');
 var config = require('./config/environment');
@@ -21,7 +21,7 @@ module.exports = function(app) {
   app.use('/auth', require('./auth'));
 
   app.use(connect()); // BEST GUESS...
-  app.use('/brackets', brackets()); // BEST GUESS...
+  //app.use('/brackets', brackets()); // BEST GUESS...
 
   // app.get('/nimble', function(req, res){
   //   res.send('Hello World');

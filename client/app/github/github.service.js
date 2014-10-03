@@ -14,7 +14,12 @@ angular.module('appceptionApp')
     };
 
     //Get list and content of repo files for the logged in user.
-    var getRepoFiles = function(githubLogin, githubRepo) {
+    var getRepoFiles = function(githubLogin, githubRepo, githubBranch) {
+
+
+
+      var GHBRANCH = githubBranch || 'master'; // FIX! Find out what param is necessary for the JSON object below...
+
       return $http({
         method: 'GET',
         url: '/api/projects/files',
@@ -23,7 +28,7 @@ angular.module('appceptionApp')
           githubRepo: githubRepo
         }
       });
-    };
+    }; // end getRepoFiles
 
     var getRepoFilesClient = function(githubLogin, githubRepo) {
       console.log('inside getArchiveLink')

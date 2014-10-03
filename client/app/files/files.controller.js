@@ -30,14 +30,27 @@ angular.module('appceptionApp')
   		}
 	  });
 
-    $scope.addDeployBranch = function() {
+    $scope.addDeployBranch = function() { // CAN WE abstract this out and use the default option from addBranch below...
       // Create a gh-pages branch
       github.createBranch($scope.username, $scope.repoName, 'master', 'gh-pages')
         .then(function(res) {
-          console.log('addDeployBranch success!', res)
+          console.log('addDeployBranch success!\n', res)
           $scope.isDeployed = true;
         })
-    }
+    }; // end addDeployBranch()
+
+
+    $scope.addBranch = function() {
+      var branchName = prompt("Enter your branch name:");
+      branchName = branchName || 'gh-pages'; // default to 'gh-pages'
+
+      github.createBranch($scope.username, $scope.repoName, 'master', branchName)
+        .then(function(res) {
+          console.log('addBranch', branchName, 'success!\n', res)
+          // $scope.currentBranch = branchName; // Can/should we track the user's current branch
+        })
+    }; // end addBranch()
+
 
     var filer = new Filer.FileSystem({
       name: 'files',
@@ -125,7 +138,7 @@ angular.module('appceptionApp')
             console.log('user: ', user)
             github.createCommit(user.github.login, $scope.repoName, message, filesArray)
               .then(function(res){
-                console.log('success!', res.data);
+                console.log('success!\n', res.data);
                 $scope.committing = false;
                 $scope.success = true;
               })
