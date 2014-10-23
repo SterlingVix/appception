@@ -1,6 +1,6 @@
 {
   "name": "appception",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "dependencies": {
     "angular": ">=1.2.*",
     "json3": "~3.3.1",
@@ -18,7 +18,8 @@
     "angular-mocks": ">=1.2.*",
     "angular-scenario": ">=1.2.*",
     "angularjs-indexedDB": "*",
-    "filer": "~0.0.29"
+    "filer": "~0.0.29",
+    "sweetalert": "~0.1.2"
   },
   "devDependencies": {}
 }
